@@ -1,6 +1,7 @@
 'use strict';
 
 var util = require('util');
+var Canvas = require('./canvas');
 
 var Hanoi = function(disks) {
   this.towers = {
@@ -21,7 +22,9 @@ Hanoi.prototype._init = function() {
 };
 
 Hanoi.prototype.solve = function() {
-  console.log(this.towers);
+  // this.print();
+
+  // return;
 
   this._solve(
     'src',
@@ -42,6 +45,43 @@ Hanoi.prototype._solve = function(x, y, z, n) {
     console.log(this.towers);
 
     this._solve(y, x, z, n - 1);
+  }
+};
+
+Hanoi.prototype.print = function() {
+  var maxDiskWidth = (this.disks + 1) * 2 + 1;
+  var maxDiskHeight = 3;
+  
+  var width = 60;
+  var height = this.disks * maxDiskHeight + 4;
+
+  var canvas = new Canvas(width, height);
+  this._printTower(canvas, 0, this.towers.src);
+  this._printTower(canvas, 1, this.towers.aux);
+  this._printTower(canvas, 2, this.towers.dest);
+
+  console.log(canvas.toString());
+
+};
+
+Hanoi.prototype._printTower = function(canvas, num, tower) {
+  var towerWidth = (this.disks + 1) * 2 + 2;
+  var towerHeight = this.disks * 3 + 4;
+  var towerXOffset = num * (towerWidth + 2);
+
+  var center = towerWidth / 2;
+
+  var i;
+
+  // draw pole
+  for(i = 0; i < towerHeight; i++) {
+    canvas.setChar(center + towerXOffset, i, '┃');
+  }
+
+  // draw base
+  for(i = 0; i < towerWidth; i++) {
+    // console.log(i, towerHeight)
+    canvas.setChar(i + towerXOffset, towerHeight - 1, '━');
   }
 };
 
