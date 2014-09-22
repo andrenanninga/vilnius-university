@@ -1,112 +1,111 @@
 'use strict';
 
-var util = require('util');
-var Canvas = require('./canvas');
-
 var Hanoi = function(disks) {
-  this.towers = {
-    'src': [], // initial 
-    'aux': [], // intermediate
-    'dest': []  // target
-  };
-
-  this.disks = disks;
-
-  this._init();
+  this.reset(disks);
 };
 
-Hanoi.prototype._init = function() {
+Hanoi.prototype.reset = function(disks) {
+  this.disks = disks;
+  this.moves = 0;
+
+  this.towers = {
+    'A': [],  // initial 
+    'B': [],  // intermediate
+    'C': []  // target
+  };
+
   for(var i = this.disks; i > 0; i--) {
-    this.towers.src.push(i);
+    this.towers.A.push(i);
   }
 };
 
-Hanoi.prototype.solve = function() {
-  // this.print();
+Hanoi.prototype.solveRecursive = function() {
+  console.log('Initial state\n');
+  this.print();
 
-  // return;
-
-  this._solve(
-    'src',
-    'aux',
-    'dest',
-    this.disks
-  );
+  this._solveRecursive('A', 'B', 'C', this.disks);
 };
 
-Hanoi.prototype._solve = function(x, y, z, n) {
+Hanoi.prototype._solveRecursive = function(x, y, z, n) {
   if(n > 0) {
-    this._solve(x, z, y, n - 1);
+    this._solveRecursive(x, z, y, n - 1);
 
+    // move disk from tower x to tower z
     var disc = this.towers[x].indexOf(n); // find index of the disc
     this.towers[x].splice(disc, 1); // remove disc from tower
     this.towers[z].push(n); // add disc to other tower
 
-    console.log(this.towers);
+    this.moves += 1;
+    console.log('Move ' + this.moves + ': move disk ' + n + ' from tower \'' + x + '\' to tower \'' + z + '\'\n');
 
-    this._solve(y, x, z, n - 1);
+    this.print();
+
+    this._solveRecursive(y, x, z, n - 1);
   }
+};
+
+Hanoi.prototype.solveIterative = function() {
 };
 
 Hanoi.prototype.print = function() {
-  var maxDiskWidth = (this.disks + 1) * 2 + 1;
-  var maxDiskHeight = 3;
-  
-  var width = 60;
-  var height = this.disks * maxDiskHeight + 4;
+  // print each tower
+  var towers = [
+    this._towerToString(this.towers.A, 'A').split('\n'),
+    this._towerToString(this.towers.B, 'B').split('\n'),
+    this._towerToString(this.towers.C, 'C').split('\n')
+  ];
 
-  var canvas = new Canvas(width, height);
-  this._printTower(canvas, 0, this.towers.src);
-  this._printTower(canvas, 1, this.towers.aux);
-  this._printTower(canvas, 2, this.towers.dest);
-
-  console.log(canvas.toString());
-
-};
-
-Hanoi.prototype._printTower = function(canvas, num, tower) {
-  var towerWidth = (this.disks + 1) * 2 + 2;
-  var towerHeight = this.disks * 3 + 4;
-  var towerXOffset = num * (towerWidth + 2);
-
-  var center = towerWidth / 2;
-
-  var i;
-
-  // draw pole
-  for(i = 0; i < towerHeight; i++) {
-    canvas.setChar(center + towerXOffset, i, '┃');
+  // join the lines for each tower together to create a side-by-side view
+  var canvas = [];
+  for(var i = 0; i < towers[0].length; i++) {
+    canvas.push(towers[0][i] + ' ' + towers[1][i] + ' ' + towers[2][i]);
   }
 
-  // draw base
-  for(i = 0; i < towerWidth; i++) {
-    // console.log(i, towerHeight)
-    canvas.setChar(i + towerXOffset, towerHeight - 1, '━');
-  }
+  console.log(canvas.join('\n') + '\n');
 };
 
-// Hanoi.prototype.print = function() {
-//   for(var i = 0; i < this.towers.length; i++) {
-//     for(var j = 0; j < this.disks; j++) {
-//       util.print('|');
-//     }
+Hanoi.prototype._towerToString = function(tower, name) {
+  var width = this.disks * 2 + 3;
+  var middle = Math.floor(width / 2);
+  name = name || ' ';
 
-//     util.print('\n');
-//   }
-// };
+  // repeat any charater n times and return the string
+  // default character is a space
+  var repeat = function(amount, character) {
+    character = character || ' ';
 
-// Hanoi.prototype._toStringTower = function(tower) {
-//   var lines = [];
+    return new Array(Math.floor(amount) + 1).join(character);
+  };
 
-//   var height = this.disks * 2 + 2;
-//   var width = this.disks * 2 + 1;
-//   var middle = width / 2;
+  var canvas = [];
 
-//   lines.push()
 
-//   for(var i = 0 i < height; i++) {
+  // check for the maximum amount of disk possible on a single tower
+  for(var i = this.disks; i >= 0; i--) {
+    // if a disk is found at the index then print it
+    if(tower[i]) {
+      var disk = tower[i];
+      var diskWidth = disk * 2 + 1;
+      var outerPadding = Math.floor((width - diskWidth) / 2);
+      var innerPadding = disk - 1;
 
-//   }
-// }
+      // create a line for the top of a disk
+      canvas.push(repeat(outerPadding) + repeat(diskWidth, '-') + repeat(outerPadding));
+      // create the body for the disk
+      canvas.push(repeat(outerPadding) + '|' + repeat(innerPadding) + tower[i] + repeat(innerPadding) + '|' + repeat(outerPadding));
+    }
+    // if no disk is found then print the stick
+    else {
+      canvas.push(repeat(middle) + '|' + repeat(middle));
+      canvas.push(repeat(middle) + '|' + repeat(middle));
+    }
+  }
+
+  // add a base for the tower
+  canvas.push(repeat(width, '-'));
+  canvas.push(repeat(middle) + name + repeat(middle));
+
+  return canvas.join('\n');
+};
 
 module.exports = Hanoi;
