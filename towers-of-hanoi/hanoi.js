@@ -37,7 +37,7 @@ Hanoi.prototype.replay = function() {
   stdin.on('data', function() {
     var state = self.states.splice(0, 1)[0];
 
-    process.stdout.write('\u001B[2J\u001B[0;0f');
+    // process.stdout.write('\u001B[2J\u001B[0;0f');
 
     if(self.algorithm === 'recursive') {
       self.print('linear', state);
