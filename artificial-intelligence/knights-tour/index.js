@@ -24,7 +24,7 @@ var opts = require('nomnom')
   .parse();
 
 var tour = new Tour(opts.size);
-tour.start(opts.start[0], opts.start[1]);
+tour.solve(opts.start[0], opts.start[1]);
 
 var table = new Table();
 tour.board.map(function(row) { table.push(row); });
