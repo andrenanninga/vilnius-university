@@ -58,9 +58,9 @@
 _L_(101) = {100, 101, 110, 111}
 
 Φ<sub>p</sub>(C, 101) = Φ<sub>p</sub>(101,100) + Φ<sub>p</sub>(101, 101) + Φ<sub>p</sub>(101, 110) + Φ<sub>p</sub>(101, 111)  
-     = p<sup>2</sup>(1 - p) + p<sup>3</sup> + p(1 - p)<sup>2</sup> + p<sup>2</sup>(1 - p)  
-     = p<sup>3</sup> + 2p<sup>2</sup>(1 - p) + p(1 - p)<sup>2</sup>  
-     = .90 (assuming p = .90)  
+= p<sup>2</sup>(1 - p) + p<sup>3</sup> + p(1 - p)<sup>2</sup> + p<sup>2</sup>(1 - p)  
+= p<sup>3</sup> + 2p<sup>2</sup>(1 - p) + p(1 - p)<sup>2</sup>  
+= .90 (assuming p = .90)  
 
 ### Exercise 1.10.4
 
@@ -69,12 +69,12 @@ _L_(101) = {100, 101, 110, 111}
 _L_(110) = {110, 111}
 
 Φ<sub>p</sub>(C, 110) = Φ<sub>p</sub>(110, 110) + Φ<sub>p</sub>(110, 111)  
-     = p<sup>3</sup> + p<sup>2</sup>(1 - p)  
-     = 0.81 (assuming p = 0.90)  
+= p<sup>3</sup> + p<sup>2</sup>(1 - p)  
+= 0.81 (assuming p = 0.90)  
 
 Φ<sub>p</sub>(110, 000)  
-     = p(1 - p)<sup>2</sup>  
-     = 0.009 (assuming p = 0.90)  
+= p(1 - p)<sup>2</sup>  
+= 0.009 (assuming p = 0.90)  
 
 
 ### Exercise 1.10.5
@@ -85,26 +85,25 @@ _L_(110) = {110, 111}
 
 _L_(000) = {000, 100}
 
-Φ<sub>p</sub>(C, 000) = Φ<sub>p</sub>(000, 000) + Φ<sub>p</sub>(000, 100)
-     = p<sup>3</sup> + p<sup>2</sup>(1 - p)  
-     = 0.81 (assuming p = 0.90)  
-
+Φ<sub>p</sub>(C, 000) = Φ<sub>p</sub>(000, 000) + Φ<sub>p</sub>(000, 100)  
+= p<sup>3</sup> + p<sup>2</sup>(1 - p)  
+= 0.81 (assuming p = 0.90)  
 
 _L_(001) = {001, 101}
 
-Φ<sub>p</sub>(C, 001) = Φ<sub>p</sub>(001, 001) + Φ<sub>p</sub>(001, 101)
-     = p<sup>3</sup> + p<sup>2</sup>(1 - p)  
-     = 0.81 (assuming p = 0.90)  
+Φ<sub>p</sub>(C, 001) = Φ<sub>p</sub>(001, 001) + Φ<sub>p</sub>(001, 101)  
+= p<sup>3</sup> + p<sup>2</sup>(1 - p)  
+= 0.81 (assuming p = 0.90)  
      
 _L_(010) = {010, 110}
 
-Φ<sub>p</sub>(C, 010) = Φ<sub>p</sub>(010, 010) + Φ<sub>p</sub>(010, 110)
-     = p<sup>3</sup> + p<sup>2</sup>(1 - p)  
-     = 0.81 (assuming p = 0.90)  
+Φ<sub>p</sub>(C, 010) = Φ<sub>p</sub>(010, 010) + Φ<sub>p</sub>(010, 110)  
+= p<sup>3</sup> + p<sup>2</sup>(1 - p)  
+= 0.81 (assuming p = 0.90)  
      
 _L_(011) = {011, 111}
 
-Φ<sub>p</sub>(C, 011) = Φ<sub>p</sub>(011, 011) + Φ<sub>p</sub>(011, 111)
-     = p<sup>3</sup> + p<sup>2</sup>(1 - p)  
-     = 0.81 (assuming p = 0.90)  
+Φ<sub>p</sub>(C, 011) = Φ<sub>p</sub>(011, 011) + Φ<sub>p</sub>(011, 111)  
+= p<sup>3</sup> + p<sup>2</sup>(1 - p)  
+= 0.81 (assuming p = 0.90)  
      
