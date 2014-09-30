@@ -47,9 +47,9 @@
 
 2 ^ n
 
-Length 3: 2 ^ 3 = 8
-Length 4: 2 ^ 4 = 16
-Length 5: 2 ^ 5 = 32
+Length 3: 2 ^ 3 = 8  
+Length 4: 2 ^ 4 = 16  
+Length 5: 2 ^ 5 = 32  
 
 ### Exercise 1.2.3
 
@@ -132,14 +132,14 @@ No, for every wordt of length 4 that is not in the code there are _four_ closest
 
 2 ^ n-1
 
-2 ^ (4 - 1) = 8
-2 ^ (5 - 1) = 16
-2 ^ (6 - 1) = 32
+2 ^ (4 - 1) = 8  
+2 ^ (5 - 1) = 16  
+2 ^ (6 - 1) = 32  
 
 ### Exercise 1.4.1
 
 > Find the information rate for each of the codes in Exercise 1.3.4, 1.3.5 and 1.3.6
 
-1.3.4: Information rate of 1
-1.3.5: Information rate of 3/4
-1.3.6: Information rate of 1/3
+1.3.4: Information rate of 1  
+1.3.5: Information rate of 3/4  
+1.3.6: Information rate of 1/3  
