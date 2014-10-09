@@ -27,6 +27,28 @@ var Display = function(canvas, labyrinth) {
   });
 };
 
+Display.prototype.play = function() {
+  if(!this.playing) {
+    this.playing = setInterval(this.showNextState.bind(this), 100);
+  }
+  else {
+    clearInterval(this.playing);
+    this.playing = false;
+    this.state = -1;
+    this.showNextState();
+  }
+};
+
+Display.prototype.stop = function() {
+  this.state = -1;
+  this.showNextState();
+
+  if(this.playing) {
+    clearInterval(this.playing);
+    this.playing = false;
+  }
+}
+
 Display.prototype.showNextState = function() {
   if(this.state + 1 < this.states.length) {
     this.state += 1;
@@ -70,14 +92,26 @@ Display.prototype.drawMap = function(map) {
       }
 
       this.context.fillStyle = fillStyle;
-      this.context.strokeStyle = '#000000';
+      this.context.strokeStyle = '#263248';
+      this.context.lineWidth = 1;
 
-      this.context.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
-      this.context.strokeRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+      this.context.fillRect(
+        Math.floor(x * cellWidth), 
+        Math.floor(y * cellHeight), 
+        Math.ceil(cellWidth), 
+        Math.ceil(cellHeight)
+      );
+
+      this.context.strokeRect(
+        Math.floor(x * cellWidth), 
+        Math.floor(y * cellHeight), 
+        Math.ceil(cellWidth), 
+        Math.ceil(cellHeight)
+      );
 
       this.context.font = 'bold 11pt Calibri';
       this.context.fillStyle = tinycolor.mostReadable(fillStyle, ['#263248', '#7E8AA2']);
-      this.context.fillText(cell, x * cellWidth + 5, y * cellHeight + 15);
+      // this.context.fillText(cell, x * cellWidth + 5, y * cellHeight + 15);
     }
   }
 };
