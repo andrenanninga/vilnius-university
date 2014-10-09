@@ -9,7 +9,6 @@
   "author": "Andre Nanninga <ag.nanninga@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "nomnom": "^1.8.0",
     "tinycolor2": "^1.0.0"
   }
 }
