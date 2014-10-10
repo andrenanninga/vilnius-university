@@ -34,8 +34,6 @@ Display.prototype.play = function() {
   else {
     clearInterval(this.playing);
     this.playing = false;
-    this.state = -1;
-    this.showNextState();
   }
 };
 

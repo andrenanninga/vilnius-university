@@ -2,18 +2,19 @@
 
 var EventEmitter = require("events").EventEmitter;
 
-var operations = [
-  { x: -1, y: 0, _name: 'west' },
-  { x: 0, y: -1, _name: 'south' },
-  { x: 1, y: 0, _name: 'east' },
-  { x: 0, y: 1, _name: 'north' },
-];
 
 var Labyrinth = function() {
   this.map = null;
 
   this.emitter = new EventEmitter();
 };
+
+Labyrinth.operations = [
+  { x: -1, y: 0, _name: 'west' },
+  { x: 0, y: -1, _name: 'south' },
+  { x: 1, y: 0, _name: 'east' },
+  { x: 0, y: 1, _name: 'north' },
+];
 
 Labyrinth.prototype.reset = function() {
   this.move = 0;
@@ -39,6 +40,8 @@ Labyrinth.prototype.solve = function(x, y) {
 };
 
 Labyrinth.prototype.step = function(x, y) {
+  var operations = this.getOperations(x, y);
+
   for(var i = 0; i < operations.length && !this.success; i++) {
     var operation = operations[i];
 
@@ -69,6 +72,10 @@ Labyrinth.prototype.step = function(x, y) {
       }
     }
   }
-}
+};
+
+Labyrinth.prototype.getOperations = function(x, y) {
+  return Labyrinth.operations.slice(0);
+};
 
 module.exports = Labyrinth;
