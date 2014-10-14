@@ -1,3 +1,5 @@
+/* jshint node: true */
+
 'use strict';
 
 var tinycolor = require('tinycolor2');
@@ -45,7 +47,7 @@ Display.prototype.stop = function() {
     clearInterval(this.playing);
     this.playing = false;
   }
-}
+};
 
 Display.prototype.showNextState = function() {
   if(this.state + 1 < this.states.length) {

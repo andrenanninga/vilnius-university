@@ -1,3 +1,5 @@
+/* jslint node: true */
+
 'use strict';
 
 var EventEmitter = require("events").EventEmitter;
@@ -20,7 +22,7 @@ Labyrinth.prototype.reset = function() {
   this.move = 0;
   this.moves = 0;
   this.success = false;
-}
+};
 
 Labyrinth.prototype.setMap = function(map) {
   this.map = map;
