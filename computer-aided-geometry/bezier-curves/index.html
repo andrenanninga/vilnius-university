@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Bezier</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <h2>Chaikin</h2>
+          <canvas id="chaikin-canvas" width="400" height="400"></canvas>
+
+          <br>
+
+          <label>
+            <input id="chaikin-steps" type="range" min="0" max="8">
+          </label>
+        </td>
+        <td>
+          <h2>De Casteljau</h2>
+          <canvas id="decasteljau-canvas" width="400" height="400"></canvas>
+
+          <br>
+
+          <label>
+            <input id="decasteljau-accuracy" type="range" min="1" max="10">
+          </label>
+        </td>
+      </tr>
+    </table>
+
+    <button id="polygon-add">Add point to polygon</button>
+    <button id="polygon-remove">Remove point from polygon</button>
+
+    <script src="index.js"></script>
+  </body> 
+</html>
