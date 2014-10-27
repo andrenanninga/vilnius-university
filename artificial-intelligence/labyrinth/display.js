@@ -18,20 +18,26 @@ var Display = function(canvas, labyrinth) {
   this.state = -1;
   this.states = [];
 
-  this.labyrinth.emitter.on('doMove', function(x, y, move, operation) {
-    console.log('Move: ' + move + ' - Moved ' + operation + ' to [' + x + ', ' + y + ']');
+  this.labyrinth.emitter.on('doMove', function() {
     self.states.push(JSON.parse(JSON.stringify(self.labyrinth.map)));
   });
 
-  this.labyrinth.emitter.on('undoMove', function(x, y, move, operation) {
-    console.log('Move: ' + move + ' - Undid move ' + operation + ' to [' + x + ', ' + y + ']');
+  this.labyrinth.emitter.on('undoMove', function() {
+    self.states.push(JSON.parse(JSON.stringify(self.labyrinth.map)));
+  });
+
+  this.labyrinth.emitter.on('wave-node-open', function() {
+    self.states.push(JSON.parse(JSON.stringify(self.labyrinth.waveMap)));
+  });
+
+  this.labyrinth.emitter.on('wave-path', function() {
     self.states.push(JSON.parse(JSON.stringify(self.labyrinth.map)));
   });
 };
 
 Display.prototype.play = function() {
   if(!this.playing) {
-    this.playing = setInterval(this.showNextState.bind(this), 100);
+    this.playing = setInterval(this.showNextState.bind(this), 50);
   }
   else {
     clearInterval(this.playing);
@@ -65,14 +71,21 @@ Display.prototype.showPrevState = function() {
   }
 };
 
+Display.prototype.reset = function() {
+  this.stop(); 
+
+  this.state = -1;
+  this.states = [];
+};
+
 Display.prototype.drawMap = function(map) {
   this.context.clearRect(0, 0, this.width, this.height);
 
   var cellWidth = this.width / this.labyrinth.width;
   var cellHeight = this.height / this.labyrinth.height;
 
-  for(var x = 0; x < this.labyrinth.width; x++) {
-    for(var y = 0; y < this.labyrinth.height; y++) {
+  for(var x = 0; x < this.labyrinth.width; x += 1) {
+    for(var y = 0; y < this.labyrinth.height; y += 1) {
 
       var cell = map[y][x];
       var fillStyle;

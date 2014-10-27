@@ -1,18 +1,43 @@
 <html>
   <head>
     <title>Labyrinth</title>
+
+    <style>
+      * {
+        font-family: 'verdana';
+        font-size: 14px;
+      }
+    </style>
   </head>
   <body>
-    <canvas id="canvas" width="400" height="400">
-
-    </canvas>
+    <canvas id="canvas" width="400" height="400"></canvas>
 
     <br>
 
-    <button id="prev">Previous step</button>
-    <button id="play">Play</button>
-    <button id="stop">Stop</button>
-    <button id="next">Next step</button>
+    <p>
+      map: 
+      <label>
+        <input id="map-basic" type="radio" name="map" value="basic" checked="">
+        Basic
+      </label>
+
+      <label>
+        <input id="map-advanced" type="radio" name="map" value="advanced">
+        Advanced
+      </label>
+    </p>
+
+    <p>
+      <button class="pure-button" id="depth-first">Depth first</button>
+      <button class="pure-button" id="breadth-first">Breadth first</button>
+    </p>
+
+    <p>
+      <button class="pure-button" id="prev">Previous step</button>
+      <button class="pure-button" id="play">Play</button>
+      <button class="pure-button" id="stop">Stop</button>
+      <button class="pure-button" id="next">Next step</button>
+    </p>
 
     <script src="index.js"></script>
   </body> 

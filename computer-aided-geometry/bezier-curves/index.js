@@ -1,6 +1,10 @@
 /* jslint node: true */
 /* jslint browser: true */
 
+// [todo] - movable control points
+// [todo] - quadratic: closed, open, subdivision closed & subdivision open
+// [todo] - cubic:     closed, open, subdivision closed & subdivision open
+
 'use strict';
 
 var Polygon = require('./polygon');
@@ -13,8 +17,8 @@ var chaikinContext = chaikinCanvas.getContext('2d');
 var decasteljauCanvas = document.getElementById('decasteljau-canvas');
 var decasteljauContext = decasteljauCanvas.getContext('2d');
 
-chaikinContext.fillStyle = '#00fff0';
-decasteljauContext.fillStyle = '#00fff0';
+chaikinContext.fillStyle = '#ffaa00';
+decasteljauContext.fillStyle = '#ffaa00';
 
 var polygon = new Polygon(
   { x: 100, y: 100 },
@@ -55,8 +59,8 @@ document.getElementById('decasteljau-accuracy').addEventListener('change', funct
 
 document.getElementById('polygon-add').addEventListener('click', function() {
   polygon.push({
-    x: random(100, 300),
-    y: random(100, 300),
+    x: random(50, 350),
+    y: random(50, 350),
   });
 
   chaikin.steps = [];

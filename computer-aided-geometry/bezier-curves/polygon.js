@@ -13,7 +13,7 @@ Polygon.prototype.draw = function(context) {
     var point = this.points[i];
 
     context.lineTo(point.x, point.y);
-    context.fillRect(point.x - 2, point.y - 2, 4, 4);
+    context.fillRect(point.x - 4, point.y - 4, 8, 8);
   }
 
   context.restore();

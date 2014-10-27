@@ -1,0 +1,13 @@
+{
+  "name": "computer-aided-geometry",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andre Nanninga <ag.nanninga@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+  }
+}

@@ -12,44 +12,90 @@ var labyrinth = new Labyrinth();
 var display = new Display(canvas, labyrinth);
 window.display = display;
 
-labyrinth.setMap([
-  [1, 1, 1, 1, 1, 0, 1],
-  [0, 0, 0, 0, 0, 0, 0],
-  [1, 1, 1, 1, 0, 1 ,1],
-  [1, 0, 0, 0, 0, 1, 1],
-  [1, 0, 1, 0, 1, 1, 1],
-  [1, 0, 0, 0, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1]
-]);
+var maps = {
+  basic: [
+    [1, 1, 1, 1, 1, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 0, 1 ,1],
+    [1, 0, 0, 0, 0, 1, 1],
+    [1, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1]
+  ],
+  advanced: [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1],
+    [1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1],
+    [1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,1],
+    [1,0,1,0,1,0,1,0,1,1,1,0,1,0,1,1],
+    [1,0,1,0,1,0,0,0,1,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,1,1,1,0,0,1,0,1,0,1],
+    [1,1,0,1,0,1,1,0,1,1,0,0,0,1,0,1],
+    [1,1,0,1,0,1,1,0,0,0,0,0,0,1,0,1],
+    [1,1,0,1,0,0,0,0,1,1,0,0,0,0,0,1],
+    [1,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1],
+    [1,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1]
+  ]
+};
 
-labyrinth.setMap([
-  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-  [1,0,0,0,1,0,1,1,0,0,0,0,0,0,1,1],
-  [1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1],
-  [1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,1],
-  [1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1],
-  [1,0,1,1,1,0,0,0,1,0,0,0,0,0,0,1],
-  [1,0,0,0,0,0,1,0,1,1,0,1,0,1,0,1],
-  [1,1,0,1,0,1,1,0,1,1,0,0,0,1,0,1],
-  [1,1,0,1,0,1,1,0,0,0,0,1,0,1,0,1],
-  [1,1,0,1,0,1,1,0,1,1,0,1,0,0,0,1],
-  [1,1,1,1,0,0,0,0,0,1,0,1,1,1,1,1],
-  [1,1,0,0,0,1,1,1,0,0,0,0,0,0,1,1],
-  [1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1]
-]);
+var selectedMap = maps.basic;
 
-labyrinth.solve(4, 3);
-display.showNextState();
+labyrinth.setMap(maps.basic);
+labyrinth.map[3][4] = 2;
+
+display.drawMap(labyrinth.map);
+
+document.getElementById('map-basic').onchange = function() {
+  if(this.checked) {
+    display.reset();
+    
+    labyrinth.reset();
+    labyrinth.setMap(maps.basic);
+    labyrinth.map[3][4] = 2;
+  
+    display.drawMap(labyrinth.map);
+
+    selectedMap = maps.basic;
+  }
+};
+
+document.getElementById('map-advanced').onchange = function() {
+  if(this.checked) {
+    display.reset();
+    
+    labyrinth.reset();
+    labyrinth.setMap(maps.advanced);
+    labyrinth.map[3][4] = 2;
+
+    display.drawMap(labyrinth.map);
+
+    selectedMap = maps.advanced;
+  }
+};
+
+document.getElementById('depth-first').onclick = function() {
+  display.reset();
+  
+  labyrinth.reset();
+  labyrinth.setMap(selectedMap);
+  labyrinth.solve('depth-first', 4, 3);
+  
+  display.play();
+};
+
+document.getElementById('breadth-first').onclick = function() {
+  display.reset();
+
+  labyrinth.reset();
+  labyrinth.setMap(selectedMap);
+  labyrinth.solve('breadth-first', 4, 3);
+
+  display.play();  
+};
 
 document.getElementById('play').onclick = function() {
   display.play();
-
-  if(display.playing) {
-    this.innerText = 'Pause';
-  }
-  else {
-    this.innerText = 'Play';
-  }
 };
 
 document.getElementById('stop').onclick = function() {
