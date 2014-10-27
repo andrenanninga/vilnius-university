@@ -11,4 +11,3 @@
 * When your friends are busy with study so you can avoid disturbing them
 * Visibility of deadlines (especially for deadlines that are far away)
 * Periodic reminder of the progress of (bigger) projects 
-* 
