@@ -3,7 +3,7 @@
 var Polygon = function(context, points) {
   this.points = points;
   this.context = context;
-  this.color = '#ff0000';
+  this.color = '#E74733';
   this.visible = true;
 
   this.registerEventListeners();
@@ -15,7 +15,13 @@ Polygon.prototype.draw = function() {
     return;
   }
 
+  this.context.save();
+
   this.context.fillStyle = this.color;
+  this.context.strokeStyle = this.color;
+  this.context.setLineDash([1, 10]);
+  this.context.beginPath();
+  this.context.moveTo(this.points[0].x, this.points[0].y);
 
   for(var i = 0; i < this.points.length; i += 1) {
     var point = this.points[i];
@@ -23,6 +29,11 @@ Polygon.prototype.draw = function() {
     this.context.lineTo(point.x, point.y);
     this.context.fillRect(point.x - 4, point.y - 4, 8, 8);
   }
+
+  this.context.stroke();
+  this.context.closePath();
+
+  this.context.restore();
 };
 
 Polygon.prototype.push = function(point) {

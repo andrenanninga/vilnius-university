@@ -1,60 +1,56 @@
 'use strict';
 
-var Chaikin = function(context, points, closed) {
+var DeCasteljau = function(context, points, closed) {
   this.context = context;
   this.points = points;
   this.closed = closed || true;
-  this.depth = 5;
-  this.color = '#5797BB';
+  this.precision = 50;
+  this.color = '#4EB379';
   this.visible = true;
 
-  this.steps = [];
   this.polygon = points;
 
   this.calculate();
 };
 
-Chaikin.prototype.calculate = function() {
-  var depth = this.depth;
+DeCasteljau.prototype.calculate = function() {
   var points = this.points.slice(0);
-  this.steps = [];
+  var _points = [];
 
-  while(depth > 0) {
+  for(var i = 0; i <= this.precision; i += 1) {
+    var t = i / this.precision;
 
-    var _points = [];
+    var midpoint = this._calculateMidPoint(points.slice(0), t);
 
-    if(this.closed) {
-      points.push(points[0]);
-    }
+    _points.push(midpoint);
+  }
 
+  this.polygon = _points;
+};
+
+DeCasteljau.prototype._calculateMidPoint = function(points, t) {
+  while(points.length > 1) {
+    var midpoints = [];
+    
     for(var i = 0; i < points.length - 1; i += 1) {
       var point0 = points[i];
       var point1 = points[i + 1];
 
-      var quarter0 = {
-        x: point0.x * (3/4) + point1.x * (1/4),
-        y: point0.y * (3/4) + point1.y * (1/4)
+      var midpoint = {
+        x: point0.x * (1 - t) + point1.x * (t),
+        y: point0.y * (1 - t) + point1.y * (t),
       };
 
-      var quarter1 = {
-        x: point0.x * (1/4) + point1.x * (3/4),
-        y: point0.y * (1/4) + point1.y * (3/4)
-      };
-
-      _points.push(quarter0);
-      _points.push(quarter1);
+      midpoints.push(midpoint);
     }
 
-    points = _points.slice(0);
-    this.steps.push(_points.slice(0));
-
-    depth -= 1;
+    points = midpoints.slice(0);
   }
 
-  this.polygon = points;
+  return points[0];
 };
 
-Chaikin.prototype.draw = function() {
+DeCasteljau.prototype.draw = function() {
   if(!this.visible) {
     return;
   }
@@ -64,7 +60,7 @@ Chaikin.prototype.draw = function() {
   this.context.beginPath();
   this.context.strokeStyle = this.color;
   this.context.lineWidth = 2;
-  
+
   this.context.moveTo(this.polygon[0].x, this.polygon[0].y);
 
   for(var j = 1; j < this.polygon.length; j += 1){
@@ -78,9 +74,8 @@ Chaikin.prototype.draw = function() {
   }
 
   this.context.stroke();
-  this.context.closePath();
 
   this.context.restore();
 };
 
-module.exports = Chaikin;
+module.exports = DeCasteljau;
