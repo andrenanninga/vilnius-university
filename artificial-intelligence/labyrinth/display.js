@@ -124,7 +124,7 @@ Display.prototype.drawMap = function(map) {
 
       this.context.font = 'bold 11pt Calibri';
       this.context.fillStyle = tinycolor.mostReadable(fillStyle, ['#263248', '#7E8AA2']);
-      // this.context.fillText(cell, x * cellWidth + 5, y * cellHeight + 15);
+      this.context.fillText(cell, x * cellWidth + 5, y * cellHeight + 15);
     }
   }
 };
