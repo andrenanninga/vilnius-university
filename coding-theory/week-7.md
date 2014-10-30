@@ -54,26 +54,30 @@ _C_ = _<S\>_ = {1000, 0100, 0010, 0001}
 > b\. _S_ = {1010, 0101, 1111}
 
 ```
-┌ 1010 ┐
-│ 0101 │
-└ 1111 ┘
+┌ 101 ┐
+│ 011 │
+│ 101 │
+└ 011 ┘
 
--- add row 1 (1010) to row 3 (1111)
+-- add row 1 (101) to row 3 (101) 
 
-┌ 1010 ┐
-│ 0101 │
-└ 0101 ┘
 
--- add row 2 (0101) to row 3 (0101)
+┌ 101 ┐
+│ 011 │
+│ 000 │
+└ 011 ┘
 
-┌ 1010 ┐
-│ 0101 │
-└ 0000 ┘
+-- add row 2 (011) to row 4 (011)
+
+┌ 101 ┐
+│ 011 │
+│ 000 │
+└ 000 ┘
 
 -- RREF
 ```
 
-The leading columns in the RREF are column 1 and 2. Taking these columns from the original matrix produces the basis _C_ = _<S\>_ = {101, 011}
+The leading columns in the RREF are column 1 and 2. Taking these columns from the original matrix produces the basis _C_ = _<S\>_ = {1010, 0101}
 
 > d\. {1000, 0100, 0010, 0001}
 
@@ -141,7 +145,7 @@ The basis _C<sup>⊥</sup>_ = {1010, 0101}
 │ 0010╎ │
 └ 0001╎ ┘
 
--- k = 0
+-- k = 4
 -- Matrix X
 
 [ ]
@@ -150,6 +154,8 @@ The basis _C<sup>⊥</sup>_ = {1010, 0101}
 
 [ ]
 ```
+
+The basis _C<sup>⊥</sup>_ = {}
 
 ### Exercise 2.6.4 (b)
 
@@ -160,28 +166,16 @@ a(1001101001) + b(1101000101) + c(0111001011) + d(1000010111) + e(1010001110) = 
 ```
 a + b + d + e = 0
         b + c = 0
-    b + c + e = 0
+        c + e = 0
     a + b + c = 0
             a = 0
             d = 0
-    a + b + e = 0
+    a + c + e = 0
     b + d + e = 0
     c + d + e = 0
 a + b + c + d = 0
 
-b + c + e = 0
-0     + e = 0
-        e = 0
-
-a + b + e = 0
-0 + b + 0 = 0
-        b = 0
-
-b + c = 0
-0 + c = 0
-    c = 0
-
-a = b = c = d = e = 0
+...
 ```
 
 The matrix is linearly independent and is therefore according to theorem 2.6.1 a generator for some linear code _C_.
