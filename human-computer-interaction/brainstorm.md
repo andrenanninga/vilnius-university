@@ -10,4 +10,5 @@
 * When you can do other activities
 * When your friends are busy with study so you can avoid disturbing them
 * Visibility of deadlines (especially for deadlines that are far away)
-* Periodic reminder of the progress of (bigger) projects 
+* Periodic reminder of the progress and requirements of (bigger) projects 
+* Schedule with all the homework and tasks required for each lesson/course
