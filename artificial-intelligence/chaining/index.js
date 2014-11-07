@@ -16,18 +16,21 @@ var opts = require('nomnom')
     metavar: 'FILE',
     required: true
   })
+  .option('verbose', {
+    abbr: 'v',
+    flag: true
+  })
   .parse();
 
 if(opts.chaining === 'forward') {
-  console.log('Forward chaining');
-
   parse(opts.file, function(err, data) {
     if(err) {
-      console.error('[ERROR] parser:', err.message);
+      console.error('Error during parsing:');
+      console.error('\t' + err.message);
       process.exit(0);
     }
     else {
-      forwardChain(data.rules, data.facts, data.goal);
+      var path = forwardChain(data.rules, data.facts, data.goal);
     }
   });
 }

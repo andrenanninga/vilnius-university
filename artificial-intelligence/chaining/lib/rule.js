@@ -5,7 +5,7 @@ var Rule = function(antecedents, consequent) {
   this.consequent = consequent;
 
   this.applied = false;
-  this.ignored = false;
+  this.useless = false;
 };
 
 Rule.prototype.clone = function() {
@@ -14,15 +14,19 @@ Rule.prototype.clone = function() {
 
 Rule.prototype.reset = function() {
   this.applied = false;
-  this.ignored = false;
+  this.useless = false;
 };
 
-Rule.prototype.ignore = function() {
-  this.ignored = true;
+Rule.prototype.dispose = function() {
+  this.useless = true;
 };
 
 Rule.prototype.apply = function() {
   this.applied = true;
+};
+
+Rule.prototype.toString = function() {
+  return this.antecedents.join(', ') + ' -> ' + this.consequent;
 };
 
 module.exports = Rule;
