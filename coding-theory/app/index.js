@@ -1,12 +1,8 @@
 'use strict';
 
-var Code = require('./code');
-var Word = require('./word');
+var Code = require('./lib/code');
+var Word = require('./lib/word');
 
 var code = new Code('000', '001', '010', '011', '100', '101', '110', '111');
 
-console.log(code);
-code.addParityCheckDigits();
-console.log(code);
-
-console.log(new Word('00110').distance(new Word('10100')));
+console.log(new Word('00110').add(new Word('10100')));
