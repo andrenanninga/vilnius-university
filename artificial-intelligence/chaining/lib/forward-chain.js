@@ -6,12 +6,10 @@ var _ = require('underscore');
 var forwardChain = function(rules, facts, goal) {
   var originalFacts = _.clone(facts);
 
-  rules = rules.map(function(rule) {
-    return rule.clone();
-  });
+  rules = rules.map(function(rule) { return rule.clone(); });
 
   console.log('facts:\t' + facts);
-  util.print('rules:');
+  console.log('rules:');
   _.each(rules, function(rule) { console.log('\t' + rule); });
   console.log('goal:\t' + goal);
 
@@ -21,17 +19,14 @@ var forwardChain = function(rules, facts, goal) {
 
   while(!finished) {
     if(isGoalReached(facts, goal)) {
-      console.log();
-      console.log('succesfully found a path to goal: ' + goal);
+      console.log('\nsuccesfully found a path to goal: ' + goal);
       printPath(originalFacts, path);
       break;
     }
 
     iterations += 1;
-    console.log();
-    console.log('> iteration ' + iterations);
-    console.log('facts: ' + facts);
-    console.log();
+    console.log('\n> iteration ' + iterations);
+    console.log('facts: ' + facts + '\n');
 
     var isRuleApplied = false;
 
@@ -53,8 +48,7 @@ var forwardChain = function(rules, facts, goal) {
     }
 
     if(!isRuleApplied) {
-      console.log();
-      console.log('failed to find path to goal: ' + goal);
+      console.log('\nfailed to find path to goal: ' + goal);
       console.log('facts: ' + facts);
       break;
     }
@@ -116,12 +110,6 @@ function disposeRule(rule) {
   rule.dispose();
 }
 
-function print(verbose, message) {
-  if(verbose) {
-    console.log(message);
-  }
-}
-
 function printPath(facts, path) {
   console.log();
 
@@ -129,11 +117,9 @@ function printPath(facts, path) {
     var rule = path[i];
 
     console.log('(' + facts + ')');
-    console.log('  |');
-    console.log('  v');
+    console.log('    ↓');
     console.log(rule.toString());
-    console.log('  |');
-    console.log('  v');
+    console.log('    ↓');
 
     facts.push(rule.consequent);
   }

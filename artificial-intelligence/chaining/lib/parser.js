@@ -51,7 +51,7 @@ var parse = function(file, cb) {
 
       try {
         if(state === states.RULES) {
-          result.rules.push(parseRule(i, line));
+          result.rules.push(parseRule(i, line, result.rules.length + 1));
         }
         else if(state === states.FACTS) {
           result.facts = parseFacts(i, line);
@@ -76,7 +76,7 @@ var parse = function(file, cb) {
   });
 };
 
-var parseRule = function(lineNum, line) {
+var parseRule = function(lineNum, line, number) {
   var letters = line.match(lettersRegex);
   var antecedents = [];
   var consequent;
@@ -96,7 +96,7 @@ var parseRule = function(lineNum, line) {
     }
   }
 
-  return new Rule(antecedents, consequent);
+  return new Rule(antecedents, consequent, number);
 };
 
 var parseFacts = function(lineNum, line) {
