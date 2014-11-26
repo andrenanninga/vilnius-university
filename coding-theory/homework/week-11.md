@@ -66,7 +66,33 @@ G = \left(
 \end{array} \right)
 -->
 
-![Matrix G](http://i.imgur.com/MHNZwdJ.png)
+![Matrix G](http://i.imgur.com/xvhakSx.png)
+
+n = 6
+k = 3
+
+```
+| 100111 | 
+| 010101 | 
+| 001011 | 
+```
+
+multiply generator matrix with all vectors in k<sup>3</sup> to get code _C_.
+
+000 = 000000 {w = 0}  
+001 = 001011 {w = 3}  
+010 = 010101 {w = 3}  
+011 = 011110 {w = 4}  
+100 = 100111 {w = 4}  
+101 = 101100 {w = 3}  
+110 = 110010 {w = 3}  
+111 = 111001 {w = 4}  
+
+distance between all pairs of vectors smallest distance is the distance of _C_.
+
+for linear code the distance is equal to the minimum weight of all non-zero codewords.
+
+d = 3
 
 ### Exercise 3.1.10
 
@@ -90,26 +116,28 @@ G = \left(
 
 ### Exercise 3.1.18 (b)
 
-> For each part of Exercise 3.1.5, let _k_ = 2_d_ and decide, if possible, whether or not a linear code with the given parameters exists. Find a lower and upper bound for the maximum number of codewords such a code can have, assuming that _k_ is unrestricted.
+> For each part of Exercise 3.1.5, let _k_ = 2(_d_) and decide, if possible, whether or not a linear code with the given parameters exists. Find a lower and upper bound for the maximum number of codewords such a code can have, assuming that _k_ is unrestricted.
 
 <!-- -->
 
 > b\. _n_ = 7, _d_ = 3
 
 _t_ = (d-1)/2 = 1  
-_k_ = 2_d_ = 14
+_k_ = 2(_d_) = 6
 
 Lower bound:
 <!--
-| C |   \geq \frac{2^{7-1}}{\binom{6}{0}+\binom{6}{1}}=\frac{2^6}{1+7}=\frac{64}{8}=8
+| C |   \geq \frac{2^{7-1}}{\binom{6}{0}+\binom{6}{1}}=\frac{2^6}{1+6}=\frac{64}{7}=9.142
 -->
-![Equation](http://www4a.wolframalpha.com/Calculate/MSP/MSP66922013caa5ch0580400003cihgha36ai10dbd?MSPStoreType=image/gif&s=38&w=233.&h=62.)
+![Equation](http://i.imgur.com/HRDoo2b.gif)
+
+But `|C|` must be a power of two, so `|C|`  _8_.
 
 Upper bound:
 <!--
 | C |  \leq \frac{2^7}{\binom{7}{0}+\binom{7}{1}}=\frac{128}{1+7}=\frac{128}{8}=16
 -->
-![Equation](http://www4a.wolframalpha.com/Calculate/MSP/MSP9911i3faef6b368e0ba000036e5e3f036idafib?MSPStoreType=image/gif&s=63&w=249.&h=61.)
+![Equation](http://i.imgur.com/adkZZ0v.png)
 
 ### Exercise 3.1.19 (b)
 
@@ -137,3 +165,10 @@ Upper bound:
 
 > Is it possible to have a linear code with parameters (8, 3, 5)
 
+n = 8, k = 3, d = 5
+
+![a](http://www.sciweavers.org/upload/Tex2Img_1416992041/render.png)
+
+64 < 32
+
+it can not exist
