@@ -37,4 +37,4 @@ gulp.task('webserver', function() {
 
 gulp.task('build', ['clean', 'bundle', 'browserify']);
 
-gulp.task('default', ['watch', 'webserver']);
+gulp.task('default', ['build', 'watch', 'webserver']);

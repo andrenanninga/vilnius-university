@@ -19,7 +19,7 @@ Polygon.prototype.draw = function() {
 
   this.context.fillStyle = this.color;
   this.context.strokeStyle = this.color;
-  this.context.setLineDash([1, 10]);
+  this.context.setLineDash([5, 10]);
   this.context.beginPath();
   this.context.moveTo(this.points[0].x, this.points[0].y);
 

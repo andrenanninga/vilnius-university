@@ -15,6 +15,10 @@ var Chaikin = function(context, points, closed) {
 };
 
 Chaikin.prototype.calculate = function() {
+  if(!this.visible) {
+    return;
+  }
+  
   var depth = this.depth;
   var points = this.points.slice(0);
   this.steps = [];

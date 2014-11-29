@@ -11,57 +11,66 @@ if(!context.setLineDash) {
   context.setLineDash = function () {};
 }
 
-var polygon = new Polygon(
-  context, 
-  [
-    { 'x': 149,'y': 175 },
-    { 'x': 358,'y': 139 },
-    { 'x': 413,'y': 280 },
-    { 'x': 278,'y': 367 },
-    { 'x': 106,'y': 327 }
-  ]
-);
+var curves = [];
 
+var options = {
+  addCurve: function() {
+    var curve = {};
+    curve.polygon = new Polygon(context, 
+      [
+        { 'x': 149,'y': 175 },
+        { 'x': 358,'y': 139 },
+        { 'x': 413,'y': 280 }
+      ]
+    );
 
-var chaikin = new Chaikin(context, polygon.points, false);
-var deCasteljau = new DeCasteljau(context, polygon.points, false);
-deCasteljau.closed = false;
-deCasteljau.visible = false;
+    curve.chaikin = new Chaikin(context, curve.polygon.points, false);
+    curve.deCasteljau = new DeCasteljau(context, curve.polygon.points, false);
+
+    curves.push(curve);
+    var name = 'curve' + (curves.length - 1);
+    controls[name] = controls.root.addFolder(name);
+    controls[name].polygon = controls[name].addFolder('polygon');
+    controls[name].polygon.add(curve.polygon, 'visible');
+    controls[name].polygon.addColor(curve.polygon, 'color');
+    controls[name].polygon.add(curve.polygon, 'addPoint');
+    controls[name].polygon.add(curve.polygon, 'removePoint');
+
+    controls[name].chaikin = controls[name].addFolder('chaikin');
+    controls[name].chaikin.add(curve.chaikin, 'visible');
+    controls[name].chaikin.add(curve.chaikin, 'closed');
+    controls[name].chaikin.add(curve.chaikin, 'depth').min(0).max(8).step(1);
+    controls[name].chaikin.addColor(curve.chaikin, 'color');
+
+    controls[name].deCasteljau = controls[name].addFolder('de Casteljau');
+    controls[name].deCasteljau.add(curve.deCasteljau, 'visible');
+    controls[name].deCasteljau.add(curve.deCasteljau, 'closed');
+    controls[name].deCasteljau.add(curve.deCasteljau, 'depth').min(0).max(8).step(1);
+    controls[name].deCasteljau.addColor(curve.deCasteljau, 'color');
+  }
+};
 
 var controls = {
   root: new dat.GUI()
 };
 
-controls.polygon = controls.root.addFolder('polygon');
-controls.polygon.add(polygon, 'visible');
-controls.polygon.addColor(polygon, 'color');
-controls.polygon.add(polygon, 'addPoint');
-controls.polygon.add(polygon, 'removePoint');
-
-controls.chaikin = controls.root.addFolder('chaikin');
-controls.chaikin.add(chaikin, 'visible');
-controls.chaikin.add(chaikin, 'closed');
-controls.chaikin.add(chaikin, 'depth').min(0).max(8).step(1);
-controls.chaikin.addColor(chaikin, 'color');
-controls.chaikin.open();
-
-controls.deCasteljau = controls.root.addFolder('de Casteljau');
-controls.deCasteljau.add(deCasteljau, 'visible');
-controls.deCasteljau.add(deCasteljau, 'closed');
-controls.deCasteljau.add(deCasteljau, 'precision').min(1).max(100).step(1);
-controls.deCasteljau.addColor(deCasteljau, 'color');
+controls.root.add(options, 'addCurve');
 
 var update = function() {
-  requestAnimationFrame(update);
+  // requestAnimationFrame(update);
+  setTimeout(update, 500);
 
   context.clearRect(0, 0, canvas.width, canvas.height);
-  polygon.draw();
 
-  chaikin.calculate();
-  chaikin.draw();
+  for(var i = 0; i < curves.length; i++) {
+    var curve = curves[i];
 
-  deCasteljau.calculate();
-  deCasteljau.draw();
+    curve.polygon.draw();
+    curve.chaikin.calculate();
+    curve.chaikin.draw();
+    curve.deCasteljau.calculate();
+    curve.deCasteljau.draw();
+  }
 };
 
 
@@ -73,6 +82,5 @@ window.addEventListener('resize', function() {
 window.dispatchEvent(new Event('resize'));
 update();
 
-window.polygon = polygon;
-window.chaikin = chaikin;
-window.deCasteljau = deCasteljau;
+window.curves = curves;
+window.DeCasteljau = DeCasteljau;
