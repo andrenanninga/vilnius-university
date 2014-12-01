@@ -35,48 +35,46 @@ if(opts.chaining === 'forward') {
       process.exit(0);
     }
     else {
-      console.log(data.rules[0].toString());
+      forwardChain(data.rules, data.facts, data.goal);
 
-      var chain = forwardChain(data.rules, data.facts, data.goal);
+      // _.each(chain, function(rule) {
+      //   console.log(rule.print().toString());
+      // });
 
-      _.each(chain, function(rule) {
-        console.log(rule.print().toString());
-      });
+      // var tree = { children: [] };
+      // var base = tree;
+      // var child;
+      // var Child = function(content, box) {
+      //   this.content = content;
+      //   this.box = box;
+      //   this.children = [];
+      // };
+      // _.each(chain.reverse(), function(rule, i, chain) {
+      //   child = new Child(rule.consequent, 'box');
+      //   tree.children.push(child);
+      //   tree = child;
 
-      var tree = { children: [] };
-      var base = tree;
-      var child;
-      var Child = function(content, box) {
-        this.content = content;
-        this.box = box;
-        this.children = [];
-      };
-      _.each(chain.reverse(), function(rule, i, chain) {
-        child = new Child(rule.consequent, 'box');
-        tree.children.push(child);
-        tree = child;
+      //   child = new Child('π' + rule.number, 'circle');
+      //   tree.children.push(child);
+      //   tree = child;
 
-        child = new Child('π' + rule.number, 'circle');
-        tree.children.push(child);
-        tree = child;
+      //   _.each(rule.antecedents, function(antecedent) {
+      //     console.log(chain[i].consequent);
+      //     if(i === chain.length - 1) {
+      //       child.children.push(new Child(antecedent, 'box'));
+      //     }
+      //     else if(chain[i + 1].consequent !== antecedent) {
+      //       child.children.push(new Child(antecedent, 'box'));
+      //     }
+      //   });
+      // });
 
-        _.each(rule.antecedents, function(antecedent) {
-          console.log(chain[i].consequent);
-          if(i === chain.length - 1) {
-            child.children.push(new Child(antecedent, 'box'));
-          }
-          else if(chain[i + 1].consequent !== antecedent) {
-            child.children.push(new Child(antecedent, 'box'));
-          }
-        });
-      });
+      // console.log(JSON.stringify(base, null, 2));
 
-      console.log(JSON.stringify(base, null, 2));
-
-      var print = new Print(200, 200);
-      while(base.children.length) {
-        var current = base.children.pop();
-      }
+      // var print = new Print(200, 200);
+      // while(base.children.length) {
+      //   var current = base.children.pop();
+      // }
 
       // console.log(chain);
     }

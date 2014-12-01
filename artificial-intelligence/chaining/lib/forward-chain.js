@@ -9,7 +9,7 @@ var forwardChain = function(rules, facts, goal) {
   rules = rules.map(function(rule) { return rule.clone(); });
 
   console.log('facts:\t' + facts);
-  console.log('rules:');
+  util.print('rules:');
   _.each(rules, function(rule) { console.log('\t' + rule); });
   console.log('goal:\t' + goal);
 
@@ -25,7 +25,7 @@ var forwardChain = function(rules, facts, goal) {
     }
 
     iterations += 1;
-    console.log('\n> iteration ' + iterations);
+    console.log('\n>>>>>>> iteration ' + iterations + ' <<<<<<<');
     console.log('facts: ' + facts + '\n');
 
     var isRuleApplied = false;
