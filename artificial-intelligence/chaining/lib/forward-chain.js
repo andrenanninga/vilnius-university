@@ -8,24 +8,19 @@ var forwardChain = function(rules, facts, goal) {
 
   rules = rules.map(function(rule) { return rule.clone(); });
 
-  console.log('facts:\t' + facts);
-  util.print('rules:');
-  _.each(rules, function(rule) { console.log('\t' + rule); });
-  console.log('goal:\t' + goal);
-
   var finished = false;
   var iterations = 0;
   var path = [];
 
   while(!finished) {
     if(isGoalReached(facts, goal)) {
-      console.log('\nsuccesfully found a path to goal: ' + goal);
-      printPath(originalFacts, path);
+      // console.log('\nsuccesfully found a path to goal: ' + goal);
+      // printPath(originalFacts, path);
       break;
     }
 
     iterations += 1;
-    console.log('\n>>>>>>> iteration ' + iterations + ' <<<<<<<');
+    console.log('\n> iteration ' + iterations);
     console.log('facts: ' + facts + '\n');
 
     var isRuleApplied = false;

@@ -62,8 +62,12 @@ Rule.prototype.print = function() {
   return print;
 };
 
+Rule.prototype.getNumber = function() {
+  return '[π' + this.number + ']';
+};
+
 Rule.prototype.toString = function() {
-  return '[π' + this.number + '] ' + this.antecedents.join(', ') + ' → ' + this.consequent;
+  return this.getNumber() + ' ' + this.antecedents.join(', ') + ' → ' + this.consequent;
 };
 
 module.exports = Rule;
