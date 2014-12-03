@@ -263,14 +263,71 @@ G =
 \right]
 $$
 
-$ 1010111 = 1 \cdot 1000111 + 0 \cdot 0100110 + 1 \cdot 0010101 + 0 \cdot 0001011 = 1010 = G $
-$ 0110111 = 0 \cdot 1000111 + 1 \cdot 0100110 + 1 \cdot 0010101 + 0 \cdot 0001011 = 0110 = I $
-$ 1000010 = 1 \cdot 1000111 + 0 \cdot 0100110 + 0 \cdot 0010101 + 0 \cdot 0001011 = 1000 = B $
-$ 0010101 = 0 \cdot 1000111 + 0 \cdot 0100110 + 1 \cdot 0010101 + 0 \cdot 0001011 = 0010 = D $
-$ 1001011 = 1 \cdot 1000111 + 0 \cdot 0100110 + 0 \cdot 0010101 + 1 \cdot 0001011 = 1001 = H $
-$ 0010000 = 0 \cdot 1000111 + 0 \cdot 0100110 + 1 \cdot 0010101 + 0 \cdot 0001011 = 0010 = D $
-$ 1111100 = 1 \cdot 1000111 + 1 \cdot 0100110 + 1 \cdot 0010101 + 1 \cdot 0001011 = 1111 = P $
+$ \small{ 1010111 = 1 \cdot 1000111 + 0 \cdot 0100110 + 1 \cdot 0010101 + 0 \cdot 0001011 = 1010 = G } $
+$ \small{ 0110111 = 0 \cdot 1000111 + 1 \cdot 0100110 + 1 \cdot 0010101 + 0 \cdot 0001011 = 0110 = I } $
+$ \small{ 1000010 = 1 \cdot 1000111 + 0 \cdot 0100110 + 0 \cdot 0010101 + 0 \cdot 0001011 = 1000 = B } $
+$ \small{ 0010101 = 0 \cdot 1000111 + 0 \cdot 0100110 + 1 \cdot 0010101 + 0 \cdot 0001011 = 0010 = D } $
+$ \small{ 1001011 = 1 \cdot 1000111 + 0 \cdot 0100110 + 0 \cdot 0010101 + 1 \cdot 0001011 = 1001 = H } $
+$ \small{ 0010000 = 0 \cdot 1000111 + 0 \cdot 0100110 + 1 \cdot 0010101 + 0 \cdot 0001011 = 0010 = D } $
+$ \small{ 1111100 = 1 \cdot 1000111 + 1 \cdot 0100110 + 1 \cdot 0010101 + 1 \cdot 0001011 = 1111 = P } $
 
 ### Exercise 3.4.3
+
+> Find generating and parity check matrices for an extended Hamming code of length 8.
+
+We can take the matrices from the Hamming code of length 7 from example 3.3.1
+
+$$
+H^* = 
+\left[
+  \begin{array}{ccc|c}
+    1 & 1 & 1 & 1 \\\\
+    1 & 1 & 0 & 1 \\\\
+    1 & 0 & 1 & 1 \\\\
+    0 & 1 & 1 & 1 \\\\
+    1 & 0 & 0 & 1 \\\\
+    0 & 1 & 0 & 1 \\\\
+    0 & 0 & 1 & 1 \\\\
+    \hline       
+    0 & 0 & 0 & 1
+  \end{array}
+\right]
+$$
+
+$$
+G^* = 
+\left[
+  \begin{array}{ccccccc|c}
+    1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 \\\\
+    0 & 1 & 0 & 0 & 1 & 1 & 0 & 1 \\\\
+    0 & 0 & 1 & 0 & 1 & 0 & 1 & 1 \\\\
+    0 & 0 & 0 & 1 & 0 & 1 & 1 & 1 \\\\
+  \end{array}
+\right]
+$$
+
 ### Exercise 3.4.4b
+
+> Construct an SDA for an extended Hamming code of length 8, and use it to decode the following words:
+
+Using the matrices from the previous exercise we can build the SDA:
+
+| coset leader | syndrome |
+| ------------ | -------- |
+| $00000000$   | $0000$   |
+| $10000000$   | $1111$   |
+| $01000000$   | $1101$   |
+| $00100000$   | $1011$   |
+| $00010000$   | $0111$   |
+| $00001000$   | $1001$   |
+| $00000100$   | $0101$   |
+| $00000010$   | $0011$   |
+| $00000001$   | $0001$   |
+
+> b\. $w = 11010110$
+
+The syndrome of $wH = 0011$ thus coset leader $00000010$, $w = w + v = 11010100$
+
 ### Exercise 3.4.5
+
+> Show that an extended Hamming code of length 8 is a self-dual code, i.e. $ C = C^\bot $
