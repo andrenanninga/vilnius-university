@@ -6,7 +6,7 @@ var DeCasteljau = function(context, points, closed) {
   this.context = context;
   this.points = points;
   this.closed = closed || false;
-  this.depth = 5;
+  this.depth = 4;
   this.color = '#4EB379';
   this.visible = true;
 
@@ -17,12 +17,37 @@ var DeCasteljau = function(context, points, closed) {
 
 
 DeCasteljau.prototype.calculate = function() {
-  if(!this.visible) {
+  if(!this.visible || this.points.length === 0) {
     return;
   }
 
-  var points = this.points.slice(0);
-  var parts = [points];
+  var points = _.clone(this.points);
+
+  if(points.length < 2) {
+    return;
+  }
+
+  if(this.closed) {
+    points.push(points[0]);  
+    points.push(points[1]);  
+  }
+  else {
+    var pointBefore = {
+      x: points[0].x - (points[1].x - points[0].x),
+      y: points[0].y - (points[1].y - points[0].y)
+    };
+
+    var pointAfter = {
+      x: points[points.length - 1].x - (points[points.length - 2].x - points[points.length - 1].x),
+      y: points[points.length - 1].y - (points[points.length - 2].y - points[points.length - 1].y)
+    };
+
+    points = points.splice(1, points.length - 2);
+    points.unshift(pointBefore);
+    points.push(pointAfter);
+  }
+
+  var parts = this._parts(points);
   var depth = this.depth;
 
   while(depth > 0) {
@@ -78,8 +103,32 @@ DeCasteljau.prototype._calculateSubdivision = function(points) {
   return [right, left];
 };
 
+DeCasteljau.prototype._parts = function(points) {
+  var parts = [];
+
+  for(var i = 1; i < points.length - 1; i++) {
+    var point0 = _.clone(points[i - 1]);
+    var point1 = _.clone(points[i]);
+    var point2 = _.clone(points[i + 1]);
+
+    parts.push([
+      {
+        x: (point0.x + point1.x) / 2,
+        y: (point0.y + point1.y) / 2,
+      },
+      point1,
+      {
+        x: (point1.x + point2.x) / 2,
+        y: (point1.y + point2.y) / 2,
+      }
+    ]);
+  }
+
+  return parts;
+};
+
 DeCasteljau.prototype.draw = function() {
-  if(!this.visible) {
+  if(!this.visible || this.polygon.length === 0) {
     return;
   }
 

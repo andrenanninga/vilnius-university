@@ -220,11 +220,22 @@ H =
 \left[
   \begin{array}{cc}
     1 & 1 \\\\
-    0 & 1 \\\\
     1 & 0 \\\\
+    0 & 1 \\\\
   \end{array}
 \right]
 $$
+
+$$
+G = 
+\left[
+  \begin{array}{ccC}
+    1 & 1 & 1 \\\\
+  \end{array}
+\right]
+$$
+
+The code of from the generator matrix would be $ (000, 111) $ and is thus a trivial code.
 
 ### Exercise 3.3.10 (use the message assignment of Exercise 2.6.12 not 2.6.11)
 
