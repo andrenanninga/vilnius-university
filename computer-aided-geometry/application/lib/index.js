@@ -15,6 +15,7 @@ var controls = {
 };
 
 var options = {
+  showCollisions: true,
   _addLine: function(algorithm) {
     var line = new Line(context, algorithm);
     var name = 'line' + (_.keys(curves).length);
@@ -44,6 +45,7 @@ var options = {
 controls.root.add(options, 'addChaikin');
 controls.root.add(options, 'addDeCasteljau');
 controls.root.add(options, 'addSpline');
+controls.root.add(options, 'showCollisions');
 
 // prevent errors on browsers that don't support context.setLineDash
 if(!context.setLineDash) {
@@ -80,18 +82,20 @@ var update = function() {
 
   // calculate collisions
   // draw collisions
-  if(window.invalidCollisions) {
-    collisions = calculateCollisions(_.values(curves));
-    window.invalidCollisions = false;
-  }
+  if(options.showCollisions) {
+    if(window.invalidCollisions) {
+      collisions = calculateCollisions(_.values(curves));
+      window.invalidCollisions = false;
+    }
 
-  context.globalAlpha = 1;
-  _.each(collisions, function(collision) {
-    context.beginPath();
-    context.arc(collision.x, collision.y, 5, 0, Math.PI * 2);
-    context.stroke();
-    context.closePath();
-  });
+    context.globalAlpha = 1;
+    _.each(collisions, function(collision) {
+      context.beginPath();
+      context.arc(collision.x, collision.y, 5, 0, Math.PI * 2);
+      context.stroke();
+      context.closePath();
+    });
+  }
 
   setTimeout(update, 100);
 };
