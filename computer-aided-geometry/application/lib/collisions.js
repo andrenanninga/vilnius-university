@@ -84,10 +84,10 @@ var groupIntersecting = function(intersections) {
     }
 
     _.each(centers, function(center) {
-      if(Math.abs(center.x - intersection.x0) < 5 || 
-        Math.abs(center.x - intersection.x1) < 5 || 
-        Math.abs(center.y - intersection.y0) < 5 || 
-        Math.abs(center.y - intersection.y1) < 5) {
+      if(Math.abs(center.x - intersection.x0) < 3 || 
+        Math.abs(center.x - intersection.x1) < 3 || 
+        Math.abs(center.y - intersection.y0) < 3 || 
+        Math.abs(center.y - intersection.y1) < 3) {
         
         newCenter = false;
         center.x = (center.x * center.n) + (intersection.x0 + intersection.x1) / 2;

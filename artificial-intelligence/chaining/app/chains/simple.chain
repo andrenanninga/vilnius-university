@@ -1,0 +1,10 @@
+facts: 
+T
+
+rules:
+Z C D
+C T
+Z T
+
+goal:
+Z

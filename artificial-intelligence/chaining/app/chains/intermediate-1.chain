@@ -1,0 +1,16 @@
+facts:
+T
+
+rules:
+Z C D // C, D -> Z
+D C   // C    -> D 
+C B   // B    -> C
+B A   // A    -> B
+A D   // D    -> A
+D T   // T    -> D
+A G   // G    -> A
+B H   // H    -> B
+C J   // J    -> C
+
+goal:
+Z

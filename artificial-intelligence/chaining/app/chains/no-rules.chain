@@ -1,0 +1,6 @@
+// Basic rules
+facts:
+A B C
+
+goal:
+Z

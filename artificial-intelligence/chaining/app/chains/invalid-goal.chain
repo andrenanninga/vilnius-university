@@ -1,0 +1,11 @@
+// Basic rules
+facts:
+A B C
+
+rules:
+Z F B // F, B -> Z
+F C D // C, D -> F
+D A   // A    -> D
+
+goal:
+Z D

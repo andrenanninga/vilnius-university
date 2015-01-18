@@ -1,0 +1,12 @@
+// solution is already derived
+facts:
+T
+
+rules: 
+C A B // A, B -> C 
+F D E // D, E -> F
+A T D // T, D -> A
+A K J // J, K -> A
+
+goal:
+T

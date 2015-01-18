@@ -1,0 +1,15 @@
+facts:
+A
+
+rules:
+G E // E -> G
+B F // F -> B
+Z G // G -> Z
+B A // A -> B
+C B // B -> C
+D C // C -> D
+Z D // D -> Z
+G A // A -> G
+
+goal:
+Z

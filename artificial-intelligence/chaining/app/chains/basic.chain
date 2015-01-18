@@ -1,0 +1,13 @@
+// Basic rules
+facts:
+A B C
+
+rules:
+Z F B // [π1] F, B -> Z
+F C D // [π2] C, D -> F
+D A   // [π3] A -> D
+
+goal:
+Z
+
+// path: [π3] [π2] [π1]

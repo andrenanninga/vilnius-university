@@ -1,0 +1,12 @@
+// Basic rules without solution
+facts:
+A B C
+
+rules:
+Z F B // F, B -> Z
+F C D // C, D -> F
+D E   // E    -> D
+G A B // A, B -> G
+
+goal:
+Z

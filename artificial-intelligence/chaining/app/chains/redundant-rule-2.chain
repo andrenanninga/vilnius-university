@@ -1,0 +1,12 @@
+facts:
+A B C
+
+rules:
+M K   // K    -> M
+Z M N // M, N -> Z
+Z F B // F, B -> Z
+F C D // C, D -> F
+D A   // A    -> D
+
+goal:
+Z

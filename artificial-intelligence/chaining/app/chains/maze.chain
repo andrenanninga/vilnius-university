@@ -1,0 +1,60 @@
+facts:
+J
+
+rules:
+Z A
+Z B
+C B
+B C
+D C
+C D
+E D
+A E
+D E
+G E
+F E
+E F
+E G
+J G
+M H
+I H
+H I
+J I
+G J
+I J
+N J
+K J
+J K
+L K
+K L
+H M
+O M
+J N
+P N
+M O
+Q O
+N P
+S P
+O Q
+T Q
+R Q
+Q R
+S R
+R S
+U S
+P S
+Q T
+V T
+S U
+X U
+T V
+W V
+V W
+X W
+W X
+U X
+Y X
+X Y
+
+goal:
+Z

@@ -1,0 +1,15 @@
+// redundant rules
+facts:
+A B C
+
+rules:
+L A   // A    -> L
+K L   // L    -> K
+A D   // D    -> A
+M D   // D    -> M
+Z F B // F, B -> Z
+F C D // C, D -> F
+D A   // A    -> D
+
+goal:
+Z
